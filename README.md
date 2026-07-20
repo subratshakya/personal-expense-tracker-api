@@ -17,6 +17,14 @@ A production-grade RESTful API for tracking daily expenses, managing categories,
                 └──────────────┘
 ```
 
+## 📸 Screenshots
+
+### FastAPI Interactive Docs (Swagger UI)
+![FastAPI Swagger UI](docs/assets/swagger_ui.png)
+
+### MinIO S3 Console
+![MinIO Console](docs/assets/minio_console.png)
+
 ## ✨ Features
 
 ### Core
