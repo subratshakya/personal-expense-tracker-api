@@ -98,6 +98,39 @@ docker-compose down -v
 
 ---
 
+## 🎮 How to Use the App (Swagger UI)
+
+Since this API is secured with JWT authentication and enforces strict user data isolation, you must identify yourself before creating or viewing expenses. The easiest way to interact with the API is through the built-in Swagger UI.
+
+### 1. Register a User
+1. Open the Interactive Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+2. Scroll to the **Auth** section and expand `POST /api/v1/auth/register`.
+3. Click **Try it out**.
+4. Modify the request body to include your details (email, username, password).
+5. Click **Execute**. You should receive a `201` response confirming your account creation.
+
+### 2. Login to get a Token
+1. Expand the `POST /api/v1/auth/login` endpoint.
+2. Click **Try it out**.
+3. Enter the email and password you just registered with.
+4. Click **Execute**. 
+5. In the Server Response, look for the `access_token` field. **Copy that long string of text** (without quotes).
+
+### 3. Authorize the UI
+1. Scroll to the very top of the page.
+2. Click the green **Authorize** button (or click any padlock icon next to an endpoint).
+3. A popup will appear. **Paste the access token** you copied directly into the input field.
+4. Click **Authorize** and then **Close**.
+
+### 4. Test the Secure APIs!
+Now that you are authorized, the Swagger UI will automatically attach your token to every request you make. 
+- Try going to `POST /api/v1/categories/` and create a category (like "Groceries").
+- Then try `POST /api/v1/expenses/` to log an expense using that category's ID.
+
+*Note: The token will expire after 60 minutes, at which point you'll just need to use the login endpoint again to get a new one!*
+
+---
+
 ## 🧪 API Testing with `curl`
 
 > **Note:** Replace `YOUR_TOKEN` with the actual JWT token received from the login endpoint.
