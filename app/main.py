@@ -53,11 +53,9 @@ app.include_router(summary.router, prefix="/api/v1")
 app.include_router(export.router, prefix="/api/v1")
 
 
+from fastapi.responses import RedirectResponse
+
 @app.get("/", tags=["Root"])
 async def root():
-    """Health check endpoint."""
-    return {
-        "message": "Personal Expense Tracker API is running.",
-        "docs": "/docs",
-        "version": "1.0.0",
-    }
+    """Redirect root to interactive API documentation."""
+    return RedirectResponse(url="/docs")
