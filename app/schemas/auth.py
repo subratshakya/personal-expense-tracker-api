@@ -1,0 +1,31 @@
+import uuid
+from datetime import datetime
+
+from pydantic import BaseModel, EmailStr, Field
+
+
+class UserCreate(BaseModel):
+    email: str = Field(..., max_length=255, examples=["john@example.com"])
+    username: str = Field(..., min_length=3, max_length=100, examples=["johndoe"])
+    password: str = Field(..., min_length=6, max_length=128, examples=["secretpass123"])
+
+
+class UserLogin(BaseModel):
+    email: str = Field(..., examples=["john@example.com"])
+    password: str = Field(..., examples=["secretpass123"])
+
+
+class UserResponse(BaseModel):
+    id: uuid.UUID
+    email: str
+    username: str
+    base_currency: str
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
